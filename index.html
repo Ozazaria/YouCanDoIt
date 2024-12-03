@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empowerment Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: url('https://static.wixstatic.com/media/5ea916_f5ab4fb041c641a0b36d297c07197f82~mv2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    p.instruction {
+      margin-top: 10px;
+      font-size: 18px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .content {
+      font-size: 24px;
+      color: #333;
+      margin-top: 20px;
+      padding: 20px;
+      max-width: 600px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      display: none; /* Hidden by default */
+    }
+
+    img, iframe {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .iframe-container {
+      margin-top: 200px; /* Increased gap between sections */
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px 10px 0 0;
+    }
+
+    iframe {
+      border: none;
+      max-width: 640px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>העצמה יומית</h1>
+  <p class="instruction">המסע הוא ארוך, אבל צריך להתמקד כל פעם רק בצעד הבא. לחץ על הכפתור כדי לקבל חיזוק ולהיזכר שאתה בדרך הנכונה</p>
+  <button id="generate-btn">לחץ כאן</button>
+  <div class="content" id="content-display"></div>
+
+  <!-- Google Form Embed -->
+  <div class="iframe-container">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd2L0wSB8m3SYzSyapJS_4fgKIwok73ro5fk41wsmPpb6d5Nw/viewform?embedded=true" 
+            width="640" height="375" frameborder="0" marginheight="0" marginwidth="0">בטעינה…</iframe>
+  </div>
+
+  <script>
+    const compliments = [
+      "You are stronger than you think.",
+      "Each day is a new opportunity to grow.",
+      "Believe in yourself and all that you are."
+    ];
+
+    const images = [
+      "https://via.placeholder.com/600x400?text=Stay+Positive",
+      "https://via.placeholder.com/600x400?text=You+Got+This",
+      "https://via.placeholder.com/600x400?text=Keep+Going"
+    ];
+
+    const videos = [
+      {
+        video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+        text: "Motivational Video 1"
+      },
+      {
+        video: "https://www.youtube.com/embed/3GwjfUFyY6M?rel=0",
+        text: "Motivational Video 2"
+      }
+    ];
+
+    let complimentIndex = 0;
+    let imageIndex = 0;
+    let videoIndex = 0;
+
+    document.getElementById('generate-btn').addEventListener('click', () => {
+      const randomType = Math.floor(Math.random() * 3);
+      const contentDisplay = document.getElementById('content-display');
+
+      if (randomType === 0 && compliments.length > 0) {
+        contentDisplay.innerHTML = `<p>${compliments[complimentIndex]}</p>`;
+        complimentIndex = (complimentIndex + 1) % compliments.length;
+      } else if (randomType === 1 && images.length > 0) {
+        contentDisplay.innerHTML = `<img src="${images[imageIndex]}" alt="Motivational Image">`;
+        imageIndex = (imageIndex + 1) % images.length;
+      } else if (randomType === 2 && videos.length > 0) {
+        const video = videos[videoIndex];
+        contentDisplay.innerHTML = `
+          <iframe src="${video.video}" frameborder="0" allowfullscreen></iframe>
+          <p>${video.text}</p>
+        `;
+        videoIndex = (videoIndex + 1) % videos.length;
+      }
+
+      // Display the content section when content is generated
+      contentDisplay.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
